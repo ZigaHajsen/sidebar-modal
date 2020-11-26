@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-// @ts-ignore: Unreachable code error
-const AppContext = React.createContext<any>();
+const AppContext = React.createContext<any>(undefined);
 
 interface Children {
   children: React.ReactChild;
