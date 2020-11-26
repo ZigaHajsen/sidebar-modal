@@ -1,1 +1,47 @@
 import React, { useState, useContext } from 'react';
+
+// @ts-ignore: Unreachable code error
+const AppContext = React.createContext<any>();
+
+interface Children {
+  children: React.ReactChild;
+}
+
+const AppProvider = ({ children }: Children) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openSidebar = () => {
+    setIsSidebarOpen(true);
+  };
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        isModalOpen,
+        isSidebarOpen,
+        openModal,
+        openSidebar,
+        closeModal,
+        closeSidebar,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useGlobalContext = () => {
+  return useContext(AppContext);
+};
+
+export { AppContext, AppProvider };
